@@ -1,18 +1,27 @@
+<nav class="navbar navbar-light bg-light">
+  <form class="container-fluid justify-content-end">
+    <button class="btn btn-outline-success m-2" type="button"><%= link_to "Home", lists_path %></button>
+    <button class="btn btn-outline-success m-2" type="button"><%= link_to "Add movie", new_list_bookmark_path(@list) %></button>
+  </form>
+</nav>
+
+<div class="banner-show">
 <h1><%= @list.name %></h1>
+</div>
 
-<% @list.bookmarks.each_with_index do |bookmark, index| %>
-<h3><%= index + 1 %> <%= bookmark.movie.title %></h3>
 <ul>
-  <li>description: <%= bookmark.movie.overview %></li>
-  <li>rating: <%= bookmark.movie.rating %></li>
-  <%= link_to "Remove",
-                  bookmark_path(bookmark),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %>
+<div class="cards-show">
+  <% @list.bookmarks.each_with_index do |bookmark, index| %>
+    <div class="card-show">
+      <h3><%= index + 1 %> <%= bookmark.movie.title %></h3>
+      <img src= <% bookmark.movie.poster_url%> />
+      <li><em>description:</em> <%= bookmark.movie.overview %></li>
+      <li><em>rating:</em> <%= bookmark.movie.rating %></li>
+      <button class="btn btn-outline-success m-2" type="button"><%= link_to "Remove",
+                      bookmark_path(bookmark),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></button>
+    </div>
+  <% end %>
+</div>
 </ul>
-<% end %>
-
-
-
-<%= link_to "Home", lists_path %>
-<%= link_to "Add a movie", new_list_bookmark_path(@list) %>
